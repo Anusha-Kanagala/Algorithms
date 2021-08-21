@@ -22,13 +22,16 @@ class Solution(object):
         else:
             result = result
 
-        return result
+        if result >= 2 ** 31 - 1 or result <= -2 ** 31:
+            return 2 ** 31 - 1
+        else:
+            return result
 
 
 def divideDriver():
     s = Solution()
-    dividend = 10
-    divisor = 3
+    dividend = 2147483647
+    divisor = 2
     print(s.divide(dividend, divisor))
 
 
