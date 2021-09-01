@@ -4,39 +4,39 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        result = ""
-        temp = ""
-        count = 0
-        if s.isalpha():
+        s = s.lstrip()
+        try:
+            isNegative = False
+            res = 0
+
+            if s[0] == "-":
+                isNegative = True
+
+                s = s[1:]
+            elif s[0] == "+":
+                s = s[1:]
+
+            i = 0
+            while i < len(s) and s[i].isdigit():
+                i += 1
+
+            res = int(s[:i])
+            if res != "":
+                if isNegative == True:
+                    if 0 - res < -2 ** 31:
+                        return -2 ** 31
+                    return 0 - res
+                elif res >= 2 ** 31 - 1:
+                    return 2 ** 31 - 1
+                return res
             return 0
-        for i in s:
-            if i == " " or i == 0:
-                count = count + 1
-                pass
-            if i == '+':
-                result = result
-                count = count + 1
-                pass
-            elif i == '-':
-                result = -result
-                count = count + 1
-                pass
-
-            while (count < len(s)):
-                temp = temp + s[count]
-                count = count + 1
-
-            if -2 ** 31 <= int(temp) <= 2 ** 31:
-                result = temp
-
-            else:
-                return 0
-        return result
+        except:
+            return 0
 
 
 def atoiDriver():
     s= Solution()
-    s1 = "42"
+    s1 = "00000-42a1234"
     print(s.myAtoi(s1))
 
 
